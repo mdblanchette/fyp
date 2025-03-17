@@ -20,7 +20,9 @@ export default async function Home() {
 
   return (
     <>
-      <DefaultLayout>{/* Markets Page Content Goes Here */}</DefaultLayout>
+      <DefaultLayout>{/* Markets Page Content Goes Here */
+        <p>Hi</p>
+      }</DefaultLayout>
     </>
   );
 }
