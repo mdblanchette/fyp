@@ -40,7 +40,7 @@ const menuGroups = [
           </svg>
         ),
         label: "Markets",
-        route: "/",
+        route: "/markets",
       },
       {
         icon: (
