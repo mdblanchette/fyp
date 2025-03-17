@@ -1,23 +1,16 @@
 import { Metadata } from "next";
-import DefaultLayout from "@/components/Layouts/DefaultLaout";
-import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
+import dynamic from "next/dynamic";
 
+// -- PAGE METADATA (Server Component) --
 export const metadata: Metadata = {
-  title: "Next.js Calender Page | NextAdmin - Next.js Dashboard Kit",
+  title: "Stocks - Advanced Time Series Forecasting",
   description:
-    "This is Next.js Calender page for NextAdmin  Tailwind CSS Admin Dashboard Kit",
-  // other metadata
+    "Stocks page with screener, watchlist, sorting, filtering, and live data from Yahoo Finance.",
 };
 
-const StocksPage = () => {
-  return (
-    <DefaultLayout>
-      <div className="mx-auto max-w-7xl">
-        <Breadcrumb pageName="Stocks" />
-        {/* Stocks Page Content Goes Here */}
-      </div>
-    </DefaultLayout>
-  );
-};
+// Dynamically import the client component (disable SSR)
+const StocksClient = dynamic(() => import("./StocksClient"), { ssr: false });
 
-export default StocksPage;
+export default function StocksPage() {
+  return <StocksClient />;
+}

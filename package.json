@@ -38,8 +38,10 @@
     "react-instantsearch-dom": "^6.40.4",
     "react-quill": "^2.0.0",
     "react-select": "^5.8.0",
+    "react-sparklines": "^1.7.0",
     "react-table": "^7.8.0",
-    "swiper": "^11.0.5"
+    "swiper": "^11.0.5",
+    "yahoo-finance2": "^2.13.3"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
