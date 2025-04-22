@@ -44,7 +44,11 @@ interface SectorData {
 }
 
 // IndexChart Component with Recharts
-const IndexChart = ({ data }: { data: IndexData[] }) => {
+const IndexChart = ({ data, visibleIndices, toggleIndex }: { 
+  data: IndexData[], 
+  visibleIndices: { [key: string]: boolean },
+  toggleIndex: (name: string) => void
+}) => {
   // Format data for Recharts
   const formatChartData = () => {
     // If no data or no data points, return empty array
@@ -97,13 +101,16 @@ const IndexChart = ({ data }: { data: IndexData[] }) => {
 
   const chartData = formatChartData();
   
-  // Find min/max to set domain for YAxis
+  // Find min/max to set domain for YAxis - only for visible indices
   const allValues = chartData.flatMap(point => 
-    data.map(index => point[index.name]).filter(Boolean)
+    data
+      .filter(index => visibleIndices[index.name])
+      .map(index => point[index.name])
+      .filter(Boolean)
   );
   
-  const minValue = Math.min(...allValues) * 0.995; // Add small buffer
-  const maxValue = Math.max(...allValues) * 1.005; // Add small buffer
+  const minValue = allValues.length > 0 ? Math.min(...allValues) * 0.995 : 0; // Add small buffer
+  const maxValue = allValues.length > 0 ? Math.max(...allValues) * 1.005 : 0; // Add small buffer
 
   return (
     <div className="bg-white rounded-lg shadow-md p-4">
@@ -112,7 +119,11 @@ const IndexChart = ({ data }: { data: IndexData[] }) => {
       {/* Index information */}
       <div className="mb-4 grid grid-cols-1 md:grid-cols-3 gap-4">
         {data.map((index, i) => (
-          <div key={i} className="bg-gray-50 p-2 rounded">
+          <div 
+            key={i} 
+            className={`bg-gray-50 p-2 rounded cursor-pointer transition-opacity duration-300 ${visibleIndices[index.name] ? 'opacity-100' : 'opacity-60'}`}
+            onClick={() => toggleIndex(index.name)}
+          >
             <span className="font-medium" style={{ color: index.color }}>{index.name}</span>
             <div className="text-sm">{index.value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
             <div className={`text-${index.percentChange >= 0 ? 'green' : 'red'}-500 text-xs`}>
@@ -148,15 +159,17 @@ const IndexChart = ({ data }: { data: IndexData[] }) => {
             />
             <Legend />
             {data.map((index, i) => (
-              <Line
-                key={i}
-                type="monotone"
-                dataKey={index.name}
-                stroke={index.color}
-                dot={false}
-                activeDot={{ r: 8 }}
-                strokeWidth={1.5}
-              />
+              visibleIndices[index.name] && (
+                <Line
+                  key={i}
+                  type="monotone"
+                  dataKey={index.name}
+                  stroke={index.color}
+                  dot={false}
+                  activeDot={{ r: 8 }}
+                  strokeWidth={1.5}
+                />
+              )
             ))}
           </LineChart>
         </ResponsiveContainer>
@@ -327,6 +340,22 @@ const MarketsPage = () => {
   const [newsData, setNewsData] = useState<NewsItem[]>([]);
   const [sectorData, setSectorData] = useState<SectorData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  
+  // New state to track which indices are visible on the chart
+  const [visibleIndices, setVisibleIndices] = useState<{ [key: string]: boolean }>({
+    "NASDAQ": true,
+    "S&P 500": true,
+    "Dow Jones": true
+  });
+  
+  // Function to toggle visibility of an index
+  const toggleIndex = (indexName: string) => {
+    setVisibleIndices(prev => ({
+      ...prev,
+      [indexName]: !prev[indexName]
+    }));
+  };
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -512,7 +541,11 @@ const MarketsPage = () => {
         ) : (
           <>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <IndexChart data={indexData} />
+              <IndexChart 
+                data={indexData} 
+                visibleIndices={visibleIndices} 
+                toggleIndex={toggleIndex} 
+              />
               <NewsSection news={newsData} />
             </div>
             

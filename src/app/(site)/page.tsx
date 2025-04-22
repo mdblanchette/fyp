@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
 import React from "react";
 import { structuredAlgoliaHtmlData } from "@/libs/crawlIndex";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title:
@@ -18,6 +19,10 @@ export default async function Home() {
     imageURL: "",
   });
 
+  // This will redirect the user to the markets page
+  redirect("/markets");
+
+  // The code below won't execute due to the redirect
   return (
     <>
       <DefaultLayout>{/* Markets Page Content Goes Here */
