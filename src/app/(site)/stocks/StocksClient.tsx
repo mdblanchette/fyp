@@ -13,7 +13,7 @@ interface Stock {
   marketCap: number;  // in billions
   volume: number;     // in millions
   sector: string | null;
-  fiveDayCloses: number[]; // e.g. [150.1, 152.0, ...]
+  thirtyDayCloses: number[]; // e.g. [150.1, 152.0, ...]
 }
 
 export default function StocksClient() {
@@ -56,7 +56,7 @@ export default function StocksClient() {
             marketCap: s.marketCap ? s.marketCap / 1e9 : 0,
             volume: s.regularMarketVolume ? s.regularMarketVolume / 1e6 : 0,
             sector: s.sector,
-            fiveDayCloses: s.fiveDayCloses || [],
+            thirtyDayCloses: s.thirtyDayCloses || [],
           }));
         setStocks(valid);
         setLoading(false);
@@ -324,7 +324,7 @@ export default function StocksClient() {
                       <th className="py-3 cursor-pointer" onClick={() => handleSort("volume")}>
                         Volume {getSortIndicator("volume")}
                       </th>
-                      <th className="py-3">Trend (5D)</th>
+                      <th className="py-3">Trend (30D)</th>
                       <th className="py-3">Add</th>
                     </tr>
                   </thead>
@@ -345,9 +345,9 @@ export default function StocksClient() {
                         <td>{stock.volume.toFixed(1)}M</td>
                         <td>
                           {/* Sparkline for the last 5 closes */}
-                          {stock.fiveDayCloses.length > 0 ? (
+                          {stock.thirtyDayCloses.length > 0 ? (
                             <Sparklines
-                            data={stock.fiveDayCloses}
+                            data={stock.thirtyDayCloses}
                             width={80}
                             height={24}
                             margin={4}
