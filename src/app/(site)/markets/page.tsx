@@ -472,45 +472,123 @@ const MarketsPage = () => {
         
         // Sample news data - unchanged
         const sampleNewsData: NewsItem[] = [
-          { heading: "Fed Signals Rate Cut Path as Inflation Slows", source: "CNBC", date: "17.03.25" },
-          { heading: "Nvidia Earnings Beat Expectations, Stock Soars", source: "Bloomberg", date: "16.03.25" },
-          { heading: "Treasury Yields Fall Ahead of Inflation Data", source: "Reuters", date: "15.03.25" },
-          { heading: "Oil Prices Rise Amid Middle East Tensions", source: "WSJ", date: "15.03.25" },
-          { heading: "Tech Stocks Rally on AI Optimism", source: "Financial Times", date: "14.03.25" },
+          { heading: "Fed Maintains Interest Rates Amid Strong Job Market", source: "CNBC", date: "26.04.25" },
+          { heading: "Apple's Q1 Results Exceed Expectations on AI Integration", source: "Bloomberg", date: "25.04.25" },
+          { heading: "Treasury Yields Rise as Inflation Concerns Persist", source: "Reuters", date: "24.04.25" },
+          { heading: "Oil Prices Stabilize Following Production Agreement", source: "WSJ", date: "23.04.25" },
+          { heading: "Tech Sector Leads Market Rally on Robust Earnings", source: "Financial Times", date: "22.04.25" },
         ];
         
         // Sample sector data - unchanged
+// Updated sample sector data with more industries and April 26, 2025 prices
         const sampleSectorData: SectorData[] = [
+          {
+            name: "Technology",
+            items: [
+              { symbol: "AAPL", name: "Apple Inc.", value: 238.76, percentChange: 1.32, marketCap: 3740000000000 },
+              { symbol: "MSFT", name: "Microsoft Corporation", value: 492.15, percentChange: 0.87, marketCap: 3660000000000 },
+              { symbol: "GOOGL", name: "Alphabet Inc.", value: 213.42, percentChange: 1.15, marketCap: 2620000000000 },
+              { symbol: "AMZN", name: "Amazon.com Inc.", value: 245.73, percentChange: 2.05, marketCap: 2580000000000 },
+              { symbol: "META", name: "Meta Platforms Inc.", value: 587.23, percentChange: 1.67, marketCap: 1480000000000 },
+              { symbol: "CRM", name: "Salesforce Inc.", value: 352.18, percentChange: 0.76, marketCap: 326000000000 },
+              { symbol: "ADBE", name: "Adobe Inc.", value: 582.40, percentChange: -0.32, marketCap: 254000000000 }
+            ]
+          },
           {
             name: "Semiconductors & Semiconductor Equipment",
             items: [
-              { symbol: "NVDA", name: "NVIDIA Corporation", value: 876.35, percentChange: 2.34, marketCap: 2160000000000 },
-              { symbol: "AVGO", name: "Broadcom Inc.", value: 1325.17, percentChange: 1.56, marketCap: 615000000000 },
-              { symbol: "TSM", name: "Taiwan Semiconductor", value: 139.33, percentChange: 0.88, marketCap: 723000000000 },
-              { symbol: "AMD", name: "Advanced Micro Devices", value: 169.27, percentChange: 2.14, marketCap: 273000000000 },
-              { symbol: "INTC", name: "Intel Corporation", value: 37.64, percentChange: -0.45, marketCap: 158000000000 },
-              { symbol: "KLAC", name: "KLA Corporation", value: 670.87, percentChange: 1.21, marketCap: 90000000000 },
-              { symbol: "LRCX", name: "Lam Research", value: 938.98, percentChange: 1.45, marketCap: 122000000000 },
-              { symbol: "QCOM", name: "Qualcomm Inc.", value: 164.09, percentChange: 0.93, marketCap: 183000000000 }
+              { symbol: "NVDA", name: "NVIDIA Corporation", value: 1042.87, percentChange: 2.54, marketCap: 2570000000000 },
+              { symbol: "AVGO", name: "Broadcom Inc.", value: 1486.32, percentChange: 1.21, marketCap: 688000000000 },
+              { symbol: "TSM", name: "Taiwan Semiconductor", value: 172.58, percentChange: 1.76, marketCap: 895000000000 },
+              { symbol: "AMD", name: "Advanced Micro Devices", value: 212.45, percentChange: 2.23, marketCap: 343000000000 },
+              { symbol: "INTC", name: "Intel Corporation", value: 41.25, percentChange: -0.87, marketCap: 174000000000 },
+              { symbol: "KLAC", name: "KLA Corporation", value: 782.35, percentChange: 0.91, marketCap: 105000000000 },
+              { symbol: "LRCX", name: "Lam Research", value: 1023.76, percentChange: 1.35, marketCap: 134000000000 },
+              { symbol: "QCOM", name: "Qualcomm Inc.", value: 204.83, percentChange: 1.42, marketCap: 228000000000 }
             ]
           },
           {
             name: "Automobiles & Automobiles Equipment",
             items: [
-              { symbol: "TSLA", name: "Tesla, Inc.", value: 178.02, percentChange: 1.24, marketCap: 566000000000 },
-              { symbol: "TM", name: "Toyota Motor Corp.", value: 231.17, percentChange: 0.34, marketCap: 309000000000 },
-              { symbol: "RACE", name: "Ferrari N.V.", value: 412.50, percentChange: 0.78, marketCap: 74000000000 },
-              { symbol: "GM", name: "General Motors", value: 43.65, percentChange: 0.56, marketCap: 49000000000 }
+              { symbol: "TSLA", name: "Tesla, Inc.", value: 225.63, percentChange: 3.74, marketCap: 718000000000 },
+              { symbol: "TM", name: "Toyota Motor Corp.", value: 258.42, percentChange: 0.62, marketCap: 345000000000 },
+              { symbol: "RIVN", name: "Rivian Automotive", value: 35.47, percentChange: 4.23, marketCap: 34200000000 },
+              { symbol: "F", name: "Ford Motor Company", value: 18.74, percentChange: 0.32, marketCap: 75000000000 },
+              { symbol: "GM", name: "General Motors", value: 51.28, percentChange: 0.85, marketCap: 58000000000 },
+              { symbol: "LCID", name: "Lucid Group, Inc.", value: 7.82, percentChange: -2.25, marketCap: 18500000000 },
+              { symbol: "RACE", name: "Ferrari N.V.", value: 456.79, percentChange: 1.18, marketCap: 82000000000 }
             ]
           },
           {
-            name: "Pharmaceuticals",
+            name: "Pharmaceuticals & Biotechnology",
             items: [
-              { symbol: "LLY", name: "Eli Lilly and Company", value: 765.20, percentChange: 2.36, marketCap: 727000000000 },
-              { symbol: "NVO", name: "Novo Nordisk A/S", value: 128.30, percentChange: 1.47, marketCap: 570000000000 }
+              { symbol: "LLY", name: "Eli Lilly and Company", value: 892.47, percentChange: 1.86, marketCap: 847000000000 },
+              { symbol: "NVO", name: "Novo Nordisk A/S", value: 154.26, percentChange: 2.13, marketCap: 685000000000 },
+              { symbol: "JNJ", name: "Johnson & Johnson", value: 178.53, percentChange: 0.42, marketCap: 429000000000 },
+              { symbol: "PFE", name: "Pfizer Inc.", value: 32.87, percentChange: -0.76, marketCap: 186000000000 },
+              { symbol: "MRNA", name: "Moderna, Inc.", value: 125.42, percentChange: 2.87, marketCap: 48000000000 },
+              { symbol: "BNTX", name: "BioNTech SE", value: 112.35, percentChange: 1.25, marketCap: 27500000000 },
+              { symbol: "BIIB", name: "Biogen Inc.", value: 278.65, percentChange: -0.42, marketCap: 40800000000 }
             ]
-          }
-        ];
+          },
+          {
+            name: "Energy",
+            items: [
+              { symbol: "XOM", name: "Exxon Mobil Corp.", value: 127.82, percentChange: 0.82, marketCap: 513000000000 },
+              { symbol: "CVX", name: "Chevron Corporation", value: 183.24, percentChange: 0.68, marketCap: 342000000000 },
+              { symbol: "SHEL", name: "Shell plc", value: 76.42, percentChange: 1.13, marketCap: 251000000000 },
+              { symbol: "BP", name: "BP p.l.c.", value: 43.87, percentChange: 0.92, marketCap: 123000000000 },
+              { symbol: "SLB", name: "Schlumberger Limited", value: 65.23, percentChange: -0.35, marketCap: 93200000000 },
+              { symbol: "COP", name: "ConocoPhillips", value: 142.37, percentChange: 1.25, marketCap: 165000000000 }
+            ]
+          },
+          {
+            name: "Financial Services",
+            items: [
+              { symbol: "JPM", name: "JPMorgan Chase & Co.", value: 248.76, percentChange: 0.57, marketCap: 714000000000 },
+              { symbol: "BAC", name: "Bank of America Corp.", value: 52.38, percentChange: 0.23, marketCap: 412000000000 },
+      { symbol: "WFC", name: "Wells Fargo & Company", value: 78.25, percentChange: 0.41, marketCap: 276000000000 },
+      { symbol: "V", name: "Visa Inc.", value: 312.47, percentChange: 0.92, marketCap: 622000000000 },
+      { symbol: "MA", name: "Mastercard Incorporated", value: 532.18, percentChange: 0.75, marketCap: 493000000000 },
+      { symbol: "GS", name: "The Goldman Sachs Group", value: 542.36, percentChange: 1.12, marketCap: 175000000000 },
+      { symbol: "BRK.B", name: "Berkshire Hathaway", value: 487.25, percentChange: 0.35, marketCap: 708000000000 },
+      { symbol: "AXP", name: "American Express Company", value: 267.83, percentChange: -0.27, marketCap: 192000000000 }
+    ]
+  },
+  {
+    name: "Consumer Staples",
+    items: [
+      { symbol: "PG", name: "The Procter & Gamble Company", value: 198.42, percentChange: 0.23, marketCap: 468000000000 },
+      { symbol: "KO", name: "The Coca-Cola Company", value: 78.35, percentChange: 0.45, marketCap: 338000000000 },
+      { symbol: "PEP", name: "PepsiCo, Inc.", value: 214.76, percentChange: 0.37, marketCap: 295000000000 },
+      { symbol: "COST", name: "Costco Wholesale Corporation", value: 892.53, percentChange: 1.23, marketCap: 395000000000 },
+      { symbol: "WMT", name: "Walmart Inc.", value: 112.43, percentChange: 0.56, marketCap: 302000000000 },
+      { symbol: "MDLZ", name: "Mondelez International", value: 87.25, percentChange: -0.32, marketCap: 117000000000 }
+    ]
+  },
+  {
+    name: "Communication Services",
+    items: [
+      { symbol: "NFLX", name: "Netflix, Inc.", value: 752.36, percentChange: 1.87, marketCap: 327000000000 },
+      { symbol: "DIS", name: "The Walt Disney Company", value: 146.82, percentChange: 0.73, marketCap: 268000000000 },
+      { symbol: "CMCSA", name: "Comcast Corporation", value: 56.47, percentChange: -0.52, marketCap: 224000000000 },
+      { symbol: "TMUS", name: "T-Mobile US, Inc.", value: 187.25, percentChange: 0.63, marketCap: 218000000000 },
+      { symbol: "VZ", name: "Verizon Communications", value: 47.82, percentChange: 0.15, marketCap: 201000000000 },
+      { symbol: "T", name: "AT&T Inc.", value: 25.43, percentChange: -0.38, marketCap: 182000000000 }
+    ]
+  },
+  {
+    name: "Healthcare Equipment & Services",
+    items: [
+      { symbol: "UNH", name: "UnitedHealth Group Incorporated", value: 642.75, percentChange: 0.87, marketCap: 592000000000 },
+      { symbol: "CVS", name: "CVS Health Corporation", value: 92.47, percentChange: 0.53, marketCap: 118000000000 },
+      { symbol: "ISRG", name: "Intuitive Surgical, Inc.", value: 523.18, percentChange: 1.45, marketCap: 185000000000 },
+      { symbol: "ABT", name: "Abbott Laboratories", value: 142.36, percentChange: 0.75, marketCap: 247000000000 },
+      { symbol: "TMO", name: "Thermo Fisher Scientific", value: 674.83, percentChange: 0.92, marketCap: 258000000000 },
+      { symbol: "DHR", name: "Danaher Corporation", value: 324.57, percentChange: 0.63, marketCap: 240000000000 }
+    ]
+  }
+];
         
         setIndexData(processedData);
         setNewsData(sampleNewsData);
